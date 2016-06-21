@@ -1,0 +1,8 @@
+Problem0
+
+//Given a text file with arithmetic expressions.
+//Using Unix-utility "egrep" and regular expressions,
+//display only those lines of a file in which there are even numbers.
+
+
+$ egrep '\d\d[02468]' ./text.txt

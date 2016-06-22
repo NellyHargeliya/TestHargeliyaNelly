@@ -3,6 +3,7 @@ package main;
 public class Main {
 
     public static void main(String[] args) {
-	// write your code here
+	Problem3 pr=new Problem3();
+       for(long arr:pr.maxProduct(5)){ System.out.print(arr+" ");}
     }
 }

@@ -44,25 +44,13 @@ public class Problem3 implements Summands {
 
     @Override
     public long[][] allMaxProduct(long n) {
-
         return null;
     }
 
     @Override
     public long[] maxPairProduct(long n) {
-
         return null;
     }
-
-   /* private ArrayList<Long[]> getArrayPratition() {
-        for (int i = 0; i < allArrays.size(); i++) {
-            for (long a : allArrays.get(i)) {
-                System.out.print(a + " ");
-            }
-            System.out.println();
-        }
-        return allArrays;
-    }*/
 
     public void addArrayPartition(long[] arrayNum, long lenghtNum) {
         Long[] arr = new Long[(int) lenghtNum];
@@ -98,8 +86,5 @@ public class Problem3 implements Summands {
             lenghtNum = nextLenght(arrayNum, lenghtNum);
             addArrayPartition(arrayNum, lenghtNum);
         } while (lenghtNum > 1);
-        System.out.println(allArraysPratition);
     }
-
-
 }

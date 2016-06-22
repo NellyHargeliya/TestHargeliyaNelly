@@ -4,6 +4,8 @@ import main.Problem1;
 import main.Problem2;
 import main.Problem3;
 import org.junit.Test;
+
+import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertTrue;
 
 public class TestProblems {
@@ -30,15 +32,15 @@ public class TestProblems {
     public void testFitBraces() {
         //test fitBraces
         Problem1 fit = new Problem1();
-        assertTrue((fit.fitBraces("652",3)).equals("((6/5)+2)"));
-}
+        assertTrue((fit.fitBraces("652", 3)).equals("((6/5)+2)"));
+    }
 
     @Test
     public void testIsLucky() {
         Problem2 lucky = new Problem2();
         //test isLucky()
         assertTrue(lucky.isLucky("123600"));
-        assertTrue(lucky.isLucky("123656")==false);
+        assertTrue(lucky.isLucky("123656") == false);
     }
 
     @Test
@@ -49,12 +51,17 @@ public class TestProblems {
     }
 
     @Test
-    public void testCountLucky1() {
+    public void testCountLuckyString() {
         //test countLucky with string min and max number
         Problem2 lucky = new Problem2();
         assertTrue(lucky.countLucky("1000", "1002") == (1));
 
     }
 
-
+    @Test
+    public void maxProduct() {
+        Problem3 product = new Problem3();
+        long[] arr = {3, 2};
+        assertArrayEquals(arr, product.maxProduct(5));
+    }
 }

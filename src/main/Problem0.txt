@@ -5,4 +5,4 @@ Problem0
 //display only those lines of a file in which there are even numbers.
 
 
-$ grep '\b\d*[02468]\b' text.txt
+$ egrep '\b\d*[02468]\b' text.txt

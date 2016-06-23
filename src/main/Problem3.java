@@ -1,11 +1,6 @@
 package main;
 
-import javax.swing.*;
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by Nelly on 17.06.2016.
@@ -13,31 +8,34 @@ import java.util.List;
 public class Problem3 implements Summands {
     private ArrayList<ArrayList<Long>> allArraysPratition = new ArrayList<>();
 
+
+    private void setAllArraysPratition(ArrayList<Long> arr) {
+        allArraysPratition.add(arr);
+    }
+
+    public ArrayList<ArrayList<Long>> getAllArraysPratition() {
+        return allArraysPratition;
+    }
+
     @Override
     public long[] maxProduct(long n) {
-        numberPartition(n);
-        List<Long> listMax = new LinkedList<>();
-        long maxProduct = 1;
-        int sizeArray = allArraysPratition.size();
-
+        ArrayList<ArrayList<Long>> array = numberPartition(n);
+        Map<ArrayList<Long>, Long> myMap = new HashMap<>();
+        int sizeArray = array.size();
         for (int i = 0; i < sizeArray; i++) {
-            int lenghtArray = allArraysPratition.get(i).size();
+
             long tempProduct = 1;
-            for (int j = 0; j < lenghtArray; j++) {
-                tempProduct *= allArraysPratition.get(i).get(j);
+            for (long arr : array.get(i)) {
+                tempProduct *= arr;
             }
-            if (tempProduct > maxProduct) {
-                listMax.clear();
-                maxProduct = tempProduct;
-                for (int j = 0; j < lenghtArray; j++) {
-                    listMax.add(allArraysPratition.get(i).get(j));
-                }
-            }
+            myMap.put(array.get(i), tempProduct);
         }
-        int sizeListMax = listMax.size();
+
+        List<Long> listMax2 = Collections.max(myMap.entrySet(), Map.Entry.comparingByValue()).getKey();
+        int sizeListMax = listMax2.size();
         long[] productMax = new long[sizeListMax];
         for (int i = 0; i < sizeListMax; i++) {
-            productMax[i] = listMax.get(i);
+            productMax[i] = listMax2.get(i);
         }
         return productMax;
     }
@@ -58,7 +56,7 @@ public class Problem3 implements Summands {
             arr[i] = arrayNum[i];
         }
         ArrayList<Long> arrayList = new ArrayList<>(Arrays.asList(arr));
-        allArraysPratition.add(arrayList);
+        setAllArraysPratition(arrayList);
     }
 
     private long nextLenght(long[] arr, long l) {
@@ -69,13 +67,12 @@ public class Problem3 implements Summands {
         } while (i > 0 && arr[i - 1] <= arr[i]);
         arr[i]++;
         l = i + sum;
-
         for (int j = i + 1; j < l; j++)
             arr[j] = 1;
         return l;
     }
 
-    private void numberPartition(long number) {
+    private ArrayList<ArrayList<Long>> numberPartition(long number) {
         long lenghtNum = number;
         long[] arrayNum = new long[(int) number];
         for (int i = 0; i < number; i++) {
@@ -86,5 +83,6 @@ public class Problem3 implements Summands {
             lenghtNum = nextLenght(arrayNum, lenghtNum);
             addArrayPartition(arrayNum, lenghtNum);
         } while (lenghtNum > 1);
+        return getAllArraysPratition();
     }
 }

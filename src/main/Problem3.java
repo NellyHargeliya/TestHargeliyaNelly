@@ -32,6 +32,8 @@ public class Problem3 implements Summands {
         }
 
         List<Long> listMax2 = Collections.max(myMap.entrySet(), Map.Entry.comparingByValue()).getKey();
+        Set<Map.Entry<ArrayList<Long>, Long>> h = myMap.entrySet();
+        System.out.println(h);
         int sizeListMax = listMax2.size();
         long[] productMax = new long[sizeListMax];
         for (int i = 0; i < sizeListMax; i++) {

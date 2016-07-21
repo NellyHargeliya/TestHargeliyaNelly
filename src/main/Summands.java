@@ -1,7 +1,7 @@
 package main;
 
 /**
- * Created by Nelly on 17.06.2016.
+ * Created by Nelly
  */
 public interface Summands {
     long[] maxProduct(long n);

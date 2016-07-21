@@ -64,4 +64,21 @@ public class TestProblems {
         long[] arr = {3, 2};
         assertArrayEquals(arr, product.maxProduct(5));
     }
+
+    @Test
+    public void allMaxProduct() {
+        Problem3 product = new Problem3();
+        long[][] arr = {{3, 3, 3},};
+        assertArrayEquals(arr, product.allMaxProduct(9));
+    }
+
+
+    @Test
+    public void maxPairProduct() {
+        Problem3 product = new Problem3();
+        long[] arr = {1, 1, 1, 1, 1, 1};
+        assertArrayEquals(arr, product.maxPairProduct(6));
+    }
+
+
 }

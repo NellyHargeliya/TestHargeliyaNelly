@@ -3,9 +3,13 @@ package main;
 import java.util.*;
 
 import static java.util.Arrays.*;
+import static sun.management.snmp.jvminstr.JvmThreadInstanceEntryImpl.ThreadStateMap.Byte1.other;
 
 /**
- * Created by Nelly on 17.06.2016.
+ * Task 3
+ * #Created by Nelly#
+ * Given a natural number n. It is necessary to find a set of distinct positive terms,
+ * which add up to n and satisfies the given conditions
  */
 public class Problem3 implements Summands {
     private ArrayList<ArrayList<Long>> allArraysPratition = new ArrayList<>();
@@ -21,17 +25,33 @@ public class Problem3 implements Summands {
     @Override
     public long[] maxProduct(long n) {
         ArrayList<ArrayList<Long>> array = numberPartition(n);
-        Map<ArrayList<Long>, Long> myMap = new TreeMap<>(new Comparator<ArrayList<Long>>() {
-            @Override
-            public int compare(ArrayList<Long> o1, ArrayList<Long> o2) {
-                long one = 1;
-                for (long arr : o1) one *= arr;
+        return maxProductArray(array);
+    }
 
-                long two = 1;
-                for (long arr : o2) two *= arr;
-                return (int) (one - two);
+
+    private long[] maxProductArray(ArrayList<ArrayList<Long>> array) {
+        int sizeArray = array.size();
+        ArrayList<Long> tempArray = new ArrayList<>();
+        long maxProduct = 1;
+        for (int i = 0; i < sizeArray; i++) {
+            long tempProduct = 1;
+            for (long arr : array.get(i)) tempProduct *= arr;
+            if (tempProduct >= maxProduct) {
+                maxProduct = tempProduct;
+                tempArray = array.get(i);
             }
-        });
+        }
+        long[] maxArray = new long[tempArray.size()];
+        for (int i = 0; i < tempArray.size(); i++) maxArray[i] = tempArray.get(i);
+
+        return maxArray;
+    }
+
+    @Override
+    public long[][] allMaxProduct(long n) {
+        ArrayList<ArrayList<Long>> array = numberPartition(n);
+
+        Map<ArrayList<Long>, Long> myMap = new HashMap<>();
         int sizeArray = array.size();
         for (int i = 0; i < sizeArray; i++) {
             long tempProduct = 1;
@@ -40,29 +60,44 @@ public class Problem3 implements Summands {
         }
 
         List<Long> listMax2 = Collections.max(myMap.entrySet(), Map.Entry.comparingByValue()).getKey();
-        //  Set<Map.Entry<ArrayList<Long>, Long>> h = myMap.entrySet();
 
-        System.out.println(myMap);
-        int sizeListMax = listMax2.size();
-        long[] productMax = new long[sizeListMax];
-        for (int i = 0; i < sizeListMax; i++) productMax[i] = listMax2.get(i);
-
-        return productMax;
-    }
-
-    @Override
-    public long[][] allMaxProduct(long n) {
-        return null;
+        long[][] res = new long[1][listMax2.size()];
+        for (int j = 0, i = 0; i < listMax2.size(); i++) {
+            res[j][i] = listMax2.get(i);
+        }
+        return res;
     }
 
     @Override
     public long[] maxPairProduct(long n) {
-        return null;
+        ArrayList<ArrayList<Long>> array = numberPartition(n);
+
+        Map<ArrayList<Long>, Long> myMap = new HashMap<>();
+        int sizeArray = array.size();
+        for (int i = 0; i < sizeArray; i++) myMap.put(array.get(i), pairProduct(array.get(i)));
+
+        List<Long> listMax2 = Collections.max(myMap.entrySet(), Map.Entry.comparingByValue()).getKey();
+
+        long[] res = new long[listMax2.size()];
+        for (int i = 0; i < listMax2.size(); i++) res[i] = listMax2.get(i);
+        return res;
+    }
+
+    private long pairProduct(ArrayList<Long> arr) {
+        int size = arr.size();
+        long pairArrayProduct = 0;
+        for (int i = 0; i < size - 1; i++) {
+            for (int j = i + 1; j < size; j++) {
+                pairArrayProduct += arr.get(i) * arr.get(j);
+            }
+        }
+
+        return pairArrayProduct;
     }
 
     public void addArrayPartition(long[] arrayNum, long lenghtNum) {
         Long[] arr = new Long[(int) lenghtNum];
-        for (int i = 0; i < lenghtNum; i++)arr[i] = arrayNum[i];
+        for (int i = 0; i < lenghtNum; i++) arr[i] = arrayNum[i];
 
         ArrayList<Long> arrayList = new ArrayList<>(asList(arr));
         setAllArraysPratition(arrayList);
@@ -94,3 +129,4 @@ public class Problem3 implements Summands {
         return getAllArraysPratition();
     }
 }
+

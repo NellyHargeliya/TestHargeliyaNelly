@@ -4,7 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Nelly on 16.06.2016.
+ * Task 2
+ * #Created by Nelly#
+ * Ticket Number consists of an even number of digits.
+ * The lucky ticket is considered, in which the sum of the first digit
+ * is the sum of the last digits.
  */
 public class Problem2 implements LuckyTicket {
     @Override

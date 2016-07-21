@@ -1,7 +1,10 @@
 package main;
 /**
- * Created by Nelly on 17.06.2016.
- */
+ * Task 1
+ * #Created by Nelly#
+ * Given a sequence of numbers. It is necessary to place therebetween arithmetic
+ * operations so as to obtain a predetermined number.
+ **/
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -111,6 +114,7 @@ public class Problem1 implements BestFile {
     private enum CalcType {
         FitPlusMinus, Fit, FitBraces,
     }
+
 
     private boolean checkFallPast(String digits) {
         char[] chars = digits.toCharArray();
